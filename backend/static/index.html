@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberGlow | Tokyo Midnight Neon Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Pacifico&family=Press+Start+2P&family=Rajdhani:wght@500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0317;
+      --bg-surface: #12072b;
+      --bg-card: rgba(26, 12, 54, 0.75);
+      --accent-cyan: #00f0ff;
+      --accent-pink: #ff007f;
+      --accent-lime: #39ff14;
+      --accent-purple: #9d00ff;
+      --accent-amber: #ff9900;
+      --accent-red: #ff0033;
+      --text-main: #f0f3fc;
+      --text-muted: #8b80aa;
+      --neon-color: #00f0ff;
+      --neon-rgb: 0, 240, 255;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(255, 0, 127, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(0, 240, 255, 0.10) 0%, transparent 45%);
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 2rem;
+      background: rgba(18, 7, 43, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: #fff;
+      text-shadow: 0 0 10px var(--accent-pink), 0 0 20px var(--accent-pink);
+    }
+
+    .brand-sub {
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 0.65rem 1.4rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: none;
+    }
+
+    .btn-neon {
+      background: transparent;
+      color: var(--accent-cyan);
+      border: 1px solid var(--accent-cyan);
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+    }
+
+    .btn-neon:hover {
+      background: var(--accent-cyan);
+      color: #000;
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.8);
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-pink), #bd00ff);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(255, 0, 127, 0.4);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 0 25px rgba(255, 0, 127, 0.8);
+      transform: translateY(-2px);
+    }
+
+    /* Main Workspace Layout */
+    .studio-container {
+      max-width: 1400px;
+      margin: 1.5rem auto;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 1024px) {
+      .studio-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Left Control Panel */
+    .control-panel {
+      background: var(--bg-card);
+      border: 1px solid rgba(157, 0, 255, 0.3);
+      border-radius: 16px;
+      padding: 1.5rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+    }
+
+    .panel-section-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-cyan);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .input-group input[type="text"] {
+      width: 100%;
+      background: rgba(10, 3, 23, 0.8);
+      border: 1px solid rgba(157, 0, 255, 0.4);
+      padding: 0.85rem 1rem;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 1.1rem;
+      outline: none;
+      transition: border 0.3s, box-shadow 0.3s;
+    }
+
+    .input-group input[type="text"]:focus {
+      border-color: var(--accent-pink);
+      box-shadow: 0 0 12px rgba(255, 0, 127, 0.5);
+    }
+
+    /* Font grid */
+    .font-selector {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.6rem;
+    }
+
+    .font-btn {
+      background: rgba(15, 6, 32, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ccc;
+      padding: 0.65rem 0.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .font-btn.active, .font-btn:hover {
+      border-color: var(--accent-pink);
+      color: #fff;
+      background: rgba(255, 0, 127, 0.15);
+      box-shadow: 0 0 10px rgba(255, 0, 127, 0.3);
+    }
+
+    /* Color Swatches */
+    .color-swatches {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
+
+    .color-swatch {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+
+    .color-swatch:hover, .color-swatch.active {
+      transform: scale(1.15);
+      border-color: #fff;
+      box-shadow: 0 0 15px currentColor;
+    }
+
+    /* Wall textures */
+    .wall-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+    }
+
+    .wall-btn {
+      background: rgba(15, 6, 32, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #aaa;
+      padding: 0.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.75rem;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .wall-btn.active, .wall-btn:hover {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+      background: rgba(0, 240, 255, 0.1);
+    }
+
+    /* Slider */
+    .range-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .range-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent-pink);
+      cursor: pointer;
+    }
+
+    /* Toggle */
+    .switch-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: #ccc;
+    }
+
+    /* Right Preview Area */
+    .preview-column {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .preview-stage {
+      min-height: 400px;
+      border-radius: 16px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.8), 0 15px 35px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+      padding: 2rem;
+      transition: background 0.4s ease;
+    }
+
+    /* Wall texture patterns */
+    .wall-brick {
+      background-color: #110d18;
+      background-image: 
+        linear-gradient(335deg, rgba(0,0,0,0.6) 0%, transparent 60%),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.03), rgba(255,255,255,0.03) 2px, transparent 2px, transparent 40px),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.03) 2px, transparent 2px, transparent 80px);
+    }
+
+    .wall-concrete {
+      background-color: #17181c;
+      background-image: 
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.04) 0%, transparent 70%),
+        repeating-radial-gradient(circle, rgba(0,0,0,0.4) 0, rgba(0,0,0,0.4) 3px, transparent 3px, transparent 15px);
+    }
+
+    .wall-tokyo {
+      background: radial-gradient(circle at top, rgba(157, 0, 255, 0.25), transparent 70%),
+                  linear-gradient(to bottom, #090216, #15092a);
+    }
+
+    .wall-carbon {
+      background: 
+        linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+        linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+        linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+        linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+        linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+        #111;
+      background-size: 20px 20px;
+    }
+
+    .wall-acrylic {
+      background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01)), #0e051e;
+      border: 2px solid rgba(255,255,255,0.1);
+    }
+
+    /* Live Neon Sign Display */
+    .neon-display-text {
+      text-align: center;
+      line-height: 1.25;
+      font-weight: 700;
+      word-break: break-word;
+      user-select: none;
+      transition: all 0.25s ease;
+      max-width: 90%;
+    }
+
+    /* Telemetry HUD Cards */
+    .hud-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .hud-metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .hud-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: 12px;
+      padding: 1rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .hud-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .hud-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff;
+      margin-top: 0.3rem;
+      font-family: 'Rajdhani', sans-serif;
+    }
+
+    .hud-value.highlight {
+      color: var(--accent-cyan);
+      text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+    }
+
+    /* CSS Output & Quote Row */
+    .action-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .action-cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .code-box {
+      background: #06020e;
+      border: 1px solid rgba(157, 0, 255, 0.3);
+      border-radius: 12px;
+      padding: 1rem;
+      position: relative;
+    }
+
+    .code-box pre {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      color: #39ff14;
+      overflow-x: auto;
+      max-height: 140px;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 0.6rem;
+      right: 0.6rem;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+
+    .copy-btn:hover {
+      background: var(--accent-cyan);
+      color: #000;
+    }
+
+    /* Catalog Showcase Section */
+    .catalog-section {
+      max-width: 1400px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.6rem;
+      color: #fff;
+      text-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+    }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .catalog-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 0, 127, 0.25);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .catalog-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(255, 0, 127, 0.3);
+      border-color: var(--accent-pink);
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .card-specs {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .card-price {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent-lime);
+      font-family: 'Rajdhani', sans-serif;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 1, 15, 0.85);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1rem;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: #14082e;
+      border: 1px solid var(--accent-cyan);
+      box-shadow: 0 0 40px rgba(0, 240, 255, 0.3);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 500px;
+      padding: 2rem;
+    }
+
+    .modal-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.4rem;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+    }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      background: #090216;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 0.75rem;
+      color: #fff;
+      font-family: inherit;
+    }
+
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: var(--accent-cyan);
+      outline: none;
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <div class="brand-logo">CYBERGLOW</div>
+      <div class="brand-sub">Tokyo Neon Lab</div>
+    </div>
+    <div class="header-actions">
+      <a href="#catalog" class="btn btn-neon">🏮 Готовые Фигуры</a>
+      <button class="btn btn-primary" onclick="openQuoteModal()">⚡ Заказать Вывеску</button>
+    </div>
+  </header>
+
+  <!-- Studio Workspace -->
+  <main class="studio-container">
+
+    <!-- Controls -->
+    <aside class="control-panel">
+      <!-- Text input -->
+      <div>
+        <div class="panel-section-title">✍️ Текст вывески</div>
+        <div class="input-group">
+          <input type="text" id="signTextInput" value="TOKYO NIGHTS" maxlength="32" placeholder="Введите ваш текст...">
+        </div>
+      </div>
+
+      <!-- Fonts -->
+      <div>
+        <div class="panel-section-title">🔤 Неоновый Шрифт</div>
+        <div class="font-selector">
+          <button class="font-btn active" data-font="Monoline Neon" style="font-family: 'Orbitron';">Monoline Neon</button>
+          <button class="font-btn" data-font="Tokyo Cyber" style="font-family: 'Rajdhani';">Tokyo Cyber</button>
+          <button class="font-btn" data-font="Neon Script" style="font-family: 'Pacifico';">Neon Script</button>
+          <button class="font-btn" data-font="Retro Glow" style="font-family: 'Press Start 2P'; font-size: 0.7rem;">Retro Glow</button>
+        </div>
+      </div>
+
+      <!-- Glow Colors -->
+      <div>
+        <div class="panel-section-title">🌈 Цвет Свечения</div>
+        <div class="color-swatches" id="colorSwatches">
+          <div class="color-swatch active" data-color="Tokyo Cyan" data-hex="#00F0FF" data-rgb="0, 240, 255" style="background: #00F0FF; color: #00F0FF;" title="Tokyo Cyan"></div>
+          <div class="color-swatch" data-color="Sakura Pink" data-hex="#FF007F" data-rgb="255, 0, 127" style="background: #FF007F; color: #FF007F;" title="Sakura Pink"></div>
+          <div class="color-swatch" data-color="Electric Lime" data-hex="#39FF14" data-rgb="57, 255, 20" style="background: #39FF14; color: #39FF14;" title="Electric Lime"></div>
+          <div class="color-swatch" data-color="Ultraviolet" data-hex="#9D00FF" data-rgb="157, 0, 255" style="background: #9D00FF; color: #9D00FF;" title="Ultraviolet"></div>
+          <div class="color-swatch" data-color="Sunset Amber" data-hex="#FF9900" data-rgb="255, 153, 0" style="background: #FF9900; color: #FF9900;" title="Sunset Amber"></div>
+          <div class="color-swatch" data-color="Hyper Red" data-hex="#FF0033" data-rgb="255, 0, 51" style="background: #FF0033; color: #FF0033;" title="Hyper Red"></div>
+          <div class="color-swatch" data-color="Ice White" data-hex="#FFFFFF" data-rgb="255, 255, 255" style="background: #FFFFFF; color: #FFFFFF;" title="Ice White"></div>
+        </div>
+      </div>
+
+      <!-- Size -->
+      <div class="range-wrap">
+        <div class="range-header">
+          <span class="panel-section-title" style="margin: 0;">📐 Высота буквы</span>
+          <span id="heightValue">20 см</span>
+        </div>
+        <input type="range" id="heightSlider" min="15" max="50" value="20" step="1">
+      </div>
+
+      <!-- Wall Texture -->
+      <div>
+        <div class="panel-section-title">🧱 Фактура стены</div>
+        <div class="wall-options">
+          <button class="wall-btn active" data-wall="wall-brick">Кирпич</button>
+          <button class="wall-btn" data-wall="wall-concrete">Бетон</button>
+          <button class="wall-btn" data-wall="wall-tokyo">Токио</button>
+          <button class="wall-btn" data-wall="wall-carbon">Карбон</button>
+          <button class="wall-btn" data-wall="wall-acrylic">Акрил</button>
+        </div>
+      </div>
+
+      <!-- Flicker Switch -->
+      <div class="switch-row">
+        <span>⚡ Неоновое мерцание (Flicker)</span>
+        <input type="checkbox" id="flickerToggle" checked>
+      </div>
+    </aside>
+
+    <!-- Preview Stage & HUD -->
+    <section class="preview-column">
+      <!-- Neon Canvas Stage -->
+      <div class="preview-stage wall-brick" id="previewStage">
+        <div class="neon-display-text" id="neonTextDisplay">TOKYO NIGHTS</div>
+      </div>
+
+      <!-- HUD Telemetry Metrics -->
+      <div class="hud-metrics-grid">
+        <div class="hud-card">
+          <div class="hud-label">Длина трубки</div>
+          <div class="hud-value" id="hudLength">3.4 м</div>
+        </div>
+        <div class="hud-card">
+          <div class="hud-label">Мощность</div>
+          <div class="hud-value" id="hudWatts">45 W</div>
+        </div>
+        <div class="hud-card">
+          <div class="hud-label">Блок питания</div>
+          <div class="hud-value" id="hudPsu">12V 60W</div>
+        </div>
+        <div class="hud-card">
+          <div class="hud-label">Стоимость</div>
+          <div class="hud-value highlight" id="hudPrice">11,800 ₽</div>
+        </div>
+      </div>
+
+      <!-- Action Row: CSS Code Generator & Booking -->
+      <div class="action-cards-grid">
+        <div class="code-box">
+          <button class="copy-btn" onclick="copyCssCode()">Скопировать CSS</button>
+          <pre><code id="cssOutputBox">/* CSS Code */</code></pre>
+        </div>
+        <div class="hud-card" style="display: flex; flex-direction: column; justify-content: center; gap: 0.8rem;">
+          <h4 style="color: #fff;">Готовы воплотить макет в жизнь?</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">Изготовим вывеску за 3–5 дней на японском силиконе 2-го поколения с гарантией 2 года.</p>
+          <button class="btn btn-primary" onclick="openQuoteModal()">Оформить заявку на этот макет</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Ready Catalog Section -->
+  <section class="catalog-section" id="catalog">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Каталог популярных фигур</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.4rem;">Проверенные временем бестселлеры для студий, баров и лофтов</p>
+      </div>
+    </div>
+    <div class="catalog-grid" id="catalogGrid">
+      <!-- Injected via JS -->
+    </div>
+  </section>
+
+  <!-- Order / Quote Modal -->
+  <div class="modal-overlay" id="quoteModal">
+    <div class="modal-card">
+      <h3 class="modal-title">Заказ вывески</h3>
+      <form id="quoteForm">
+        <div class="form-group">
+          <label>Ваше Имя</label>
+          <input type="text" id="clientName" required placeholder="Даниэль">
+        </div>
+        <div class="form-group">
+          <label>Телефон или Telegram</label>
+          <input type="text" id="clientContact" required placeholder="@idrisov_prod или +7 999 123-45-67">
+        </div>
+        <div class="form-group">
+          <label>Пожелания к вывеске</label>
+          <textarea id="clientNotes" rows="2" placeholder="Цвет подложки (прозрачный/черный), длина провода..."></textarea>
+        </div>
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+          <button type="button" class="btn btn-neon" onclick="closeQuoteModal()" style="flex: 1;">Отмена</button>
+          <button type="submit" class="btn btn-primary" style="flex: 2;">Подтвердить заказ</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // State
+    const state = {
+      text: "TOKYO NIGHTS",
+      font: "Monoline Neon",
+      fontFamily: "'Orbitron', sans-serif",
+      colorName: "Tokyo Cyan",
+      hex: "#00F0FF",
+      rgb: "0, 240, 255",
+      heightCm: 20,
+      wall: "wall-brick",
+      flicker: true,
+      metrics: null
+    };
+
+    // DOM Elements
+    const signTextInput = document.getElementById("signTextInput");
+    const heightSlider = document.getElementById("heightSlider");
+    const heightValue = document.getElementById("heightValue");
+    const previewStage = document.getElementById("previewStage");
+    const neonTextDisplay = document.getElementById("neonTextDisplay");
+    const flickerToggle = document.getElementById("flickerToggle");
+    const hudLength = document.getElementById("hudLength");
+    const hudWatts = document.getElementById("hudWatts");
+    const hudPsu = document.getElementById("hudPsu");
+    const hudPrice = document.getElementById("hudPrice");
+    const cssOutputBox = document.getElementById("cssOutputBox");
+    const quoteModal = document.getElementById("quoteModal");
+
+    // Init
+    window.addEventListener("DOMContentLoaded", () => {
+      setupEventListeners();
+      updateNeonPreview();
+      fetchCatalog();
+    });
+
+    function setupEventListeners() {
+      // Text Input
+      signTextInput.addEventListener("input", (e) => {
+        state.text = e.target.value || "NEON";
+        updateNeonPreview();
+      });
+
+      // Fonts
+      document.querySelectorAll(".font-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".font-btn").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          state.font = btn.dataset.font;
+          if (state.font === "Monoline Neon") state.fontFamily = "'Orbitron', sans-serif";
+          else if (state.font === "Tokyo Cyber") state.fontFamily = "'Rajdhani', sans-serif";
+          else if (state.font === "Neon Script") state.fontFamily = "'Pacifico', cursive";
+          else if (state.font === "Retro Glow") state.fontFamily = "'Press Start 2P', monospace";
+          updateNeonPreview();
+        });
+      });
+
+      // Colors
+      document.querySelectorAll(".color-swatch").forEach(swatch => {
+        swatch.addEventListener("click", () => {
+          document.querySelectorAll(".color-swatch").forEach(s => s.classList.remove("active"));
+          swatch.classList.add("active");
+          state.colorName = swatch.dataset.color;
+          state.hex = swatch.dataset.hex;
+          state.rgb = swatch.dataset.rgb;
+          updateNeonPreview();
+        });
+      });
+
+      // Height Slider
+      heightSlider.addEventListener("input", (e) => {
+        state.heightCm = parseFloat(e.target.value);
+        heightValue.textContent = `${state.heightCm} см`;
+        updateNeonPreview();
+      });
+
+      // Wall selector
+      document.querySelectorAll(".wall-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".wall-btn").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          previewStage.className = `preview-stage ${btn.dataset.wall}`;
+          state.wall = btn.dataset.wall;
+        });
+      });
+
+      // Flicker
+      flickerToggle.addEventListener("change", (e) => {
+        state.flicker = e.target.checked;
+        applyNeonStyles();
+      });
+
+      // Form
+      document.getElementById("quoteForm").addEventListener("submit", submitQuote);
+    }
+
+    async function updateNeonPreview() {
+      neonTextDisplay.textContent = state.text;
+      neonTextDisplay.style.fontFamily = state.fontFamily;
+      
+      // Dynamic font size scaling
+      const baseFontSize = Math.max(24, Math.min(68, state.heightCm * 1.8));
+      neonTextDisplay.style.fontSize = `${baseFontSize}px`;
+
+      applyNeonStyles();
+
+      // Fetch Calculation from API
+      try {
+        const res = await fetch("/api/calculate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            text: state.text,
+            font_name: state.font,
+            height_cm: state.heightCm,
+            color_name: state.colorName
+          })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          state.metrics = data.metrics;
+          hudLength.textContent = `${data.metrics.tube_length_m} м`;
+          hudWatts.textContent = `${data.metrics.power_watts} W`;
+          hudPsu.textContent = data.metrics.recommended_psu;
+          hudPrice.textContent = `${data.metrics.total_price_rub.toLocaleString()} ₽`;
+          cssOutputBox.textContent = data.css_code;
+        }
+      } catch (err) {
+        console.error("Calculation API error:", err);
+      }
+    }
+
+    function applyNeonStyles() {
+      const hex = state.hex;
+      const rgb = state.rgb;
+
+      neonTextDisplay.style.color = "#FFFFFF";
+      neonTextDisplay.style.textShadow = `
+        0 0 5px #FFFFFF,
+        0 0 10px #FFFFFF,
+        0 0 20px ${hex},
+        0 0 40px ${hex},
+        0 0 80px rgba(${rgb}, 0.8),
+        0 0 120px rgba(${rgb}, 0.5)
+      `;
+      neonTextDisplay.style.filter = `drop-shadow(0 0 15px rgba(${rgb}, 0.9))`;
+    }
+
+    function copyCssCode() {
+      const code = cssOutputBox.textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        alert("✨ CSS-код неонового свечения скопирован в буфер обмена!");
+      });
+    }
+
+    async function fetchCatalog() {
+      try {
+        const res = await fetch("/api/catalog");
+        if (res.ok) {
+          const data = await res.json();
+          renderCatalog(data.figures);
+        }
+      } catch (err) {
+        console.error("Catalog fetch error:", err);
+      }
+    }
+
+    function renderCatalog(figures) {
+      const grid = document.getElementById("catalogGrid");
+      grid.innerHTML = figures.map(fig => `
+        <div class="catalog-card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="card-title">${fig.title}</div>
+            <div style="width: 14px; height: 14px; border-radius: 50%; background: ${fig.color_primary}; box-shadow: 0 0 10px ${fig.color_primary};"></div>
+          </div>
+          <div style="color: var(--text-muted); font-size: 0.85rem;">${fig.description}</div>
+          <div class="card-specs">
+            <span>📐 ${fig.dimensions}</span>
+            <span>⚡ ${fig.power_watts} W</span>
+            <span>〰️ ${fig.tube_length_m} м</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.6rem;">
+            <div class="card-price">${fig.price_rub.toLocaleString()} ₽</div>
+            <button class="btn btn-neon" style="padding: 0.4rem 0.9rem; font-size: 0.8rem;" onclick="loadFigureToDesigner('${fig.title}', '${fig.color_primary}')">В конструктор</button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function loadFigureToDesigner(title, colorHex) {
+      signTextInput.value = title.toUpperCase();
+      state.text = title.toUpperCase();
+      state.hex = colorHex;
+      // find nearest color swatch
+      const matchingSwatch = Array.from(document.querySelectorAll(".color-swatch")).find(s => s.dataset.hex.toLowerCase() === colorHex.toLowerCase());
+      if (matchingSwatch) {
+        matchingSwatch.click();
+      } else {
+        updateNeonPreview();
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openQuoteModal() {
+      quoteModal.classList.add("active");
+    }
+
+    function closeQuoteModal() {
+      quoteModal.classList.remove("active");
+    }
+
+    async function submitQuote(e) {
+      e.preventDefault();
+      const name = document.getElementById("clientName").value;
+      const contact = document.getElementById("clientContact").value;
+      const notes = document.getElementById("clientNotes").value;
+
+      try {
+        const res = await fetch("/api/quote", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            client_name: name,
+            contact: contact,
+            sign_text: state.text,
+            font_name: state.font,
+            color_name: state.colorName,
+            wall_texture: state.wall,
+            height_cm: state.heightCm,
+            notes: notes
+          })
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          alert(`✅ ${data.message}\nНомер заявки: #${data.quote_id}\nСумма: ${data.metrics.total_price_rub} ₽`);
+          closeQuoteModal();
+        } else {
+          alert(`Ошибка: ${data.detail || "Не удалось отправить заявку"}`);
+        }
+      } catch (err) {
+        alert("Ошибка сети при отправке заявки");
+      }
+    }
+  </script>
+</body>
+</html>
